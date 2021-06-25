@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="/css_admin/estilos.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous" >
+    <style>body {background-color:#5c8140 }</style>
+	<title>Gestión de Proyectos</title>
+</head>
+<body>
+	<div id="contenedor">
+		<div id="add">
+			<a class="btn btn-success" th:href="@{/admin}" role="button">👈 Volver</a>
+			<h1> Gestión de Proyectos</h1>
+		</div>
+	<table class="container">
+		<thead>
+			<tr>
+				<th><h1>Nº</h1></th>
+				<th><h1>Nombre de proyecto</h1></th>
+				<th><h1>Fecha de finalización</h1></th>
+				<th><h1>Resumen</h1></th>
+				<th><h1>Descripción</h1></th>
+				<th><h1>Imagen</h1></th>
+				<th><h1>Empresa</h1></th>
+				<th><h1>Acciones</h1></th>
+			</tr>
+		</thead>
+			<tbody>
+				<tr th:each="proyecto: ${proyectoslista}">
+					<td th:text="${proyecto.idproyecto}" />
+					<td class="td-name" th:text="${proyecto.proyecto}" />
+					<td th:text="${proyecto.fechafin}" />
+					<td th:text="${proyecto.resumen}" />
+					<td th:text="${proyecto.descripcion}" />
+					<td class="td-img"><img th:src="${proyecto.imagen}" th:title=${proyecto.imagen} onclick="window.open(this.src)"></img></td>
+					<td th:text="${proyecto.cliente!=null}?${proyecto.cliente.nombre}:'Cliente no asignado todavía'"/>
+					<td class="td-actions">
+							<a class="btn btn-outline-primary" th:href="@{/admin/proyectos/select/(id=${proyecto.idproyecto})}" role="button">Editar</a>
+							<a class="btn btn-outline-danger"  th:href="@{/admin/proyectos/delete/(id=${proyecto.idproyecto})}" role="button">Eliminar</a>			
+     				</td>
+				</tr>
+			</tbody>
+	</table>		
+	</div>
+	<div id="add">
+		<a class="btn btn-success" th:href="@{/admin/proyectos/add}" role="button">Añadir nuevo proyecto</a>
+	</div>
+	
+	</div>
+	
+</body>
+</html>
